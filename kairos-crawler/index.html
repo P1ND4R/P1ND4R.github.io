@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KAIROS-CI crawler</title>
+<meta name="description" content="Information about the KAIROS-CI web crawler: what it fetches, how it behaves, and how to block it or contact the project.">
+<meta name="robots" content="index, follow">
+<style>
+  :root { --bg:#f7f8f9; --fg:#18232a; --muted:#56656d; --line:#d9e1e4; --accent:#0e6f78; --code:#eef2f3; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#11181c; --fg:#e3eaed; --muted:#9aaab1; --line:#28363c; --accent:#5cc3cc; --code:#1a252a; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width:720px; margin:0 auto; padding:40px 20px 64px; }
+  h1 { font-size:1.9rem; line-height:1.2; margin:0 0 8px; }
+  h2 { font-size:1.2rem; margin:32px 0 8px; }
+  p, li { color:var(--fg); }
+  .lede { color:var(--muted); margin:0 0 24px; }
+  ul { padding-left:20px; }
+  code, pre { font-family: ui-monospace, Menlo, Consolas, monospace; font-size:.9em; background:var(--code); border-radius:6px; }
+  code { padding:2px 5px; }
+  pre { padding:12px 14px; overflow-x:auto; border:1px solid var(--line); }
+  a { color:var(--accent); }
+  footer { margin-top:40px; padding-top:16px; border-top:1px solid var(--line); color:var(--muted); font-size:.9rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>KAIROS-CI crawler</h1>
+  <p class="lede">If you found this page in your server logs, a request came from the KAIROS-CI crawler. This page explains what it does and how to stop it.</p>
+
+  <h2>What it is</h2>
+  <p>KAIROS-CI is an early-stage competitive intelligence project for small local businesses in the United States. It reads <strong>public marketing pages</strong> of local service businesses (for example, which services, offers or financing options a practice advertises) and summarizes changes over time.</p>
+
+  <h2>How to recognize it</h2>
+  <p>Requests use this User-Agent:</p>
+  <pre>KAIROS-CI/&lt;version&gt; (+https://p1nd4r.github.io/kairos-crawler/)</pre>
+
+  <h2>How it behaves</h2>
+  <ul>
+    <li>It follows <code>robots.txt</code>. If your robots.txt cannot be read (for example, due to an error or a block), it does not fetch your site at all in that run.</li>
+    <li>It honours <code>Crawl-delay</code>, waits at least 10 seconds between requests to the same site, and fetches only a handful of pages per site per run.</li>
+    <li>It fetches only public HTML pages. It never submits forms, logs in, books appointments or uses cookies.</li>
+    <li>It does not try to get around bot protection. A block or a rate limit is respected and recorded as a miss.</li>
+    <li>It does not collect patient, customer or other personal data.</li>
+  </ul>
+
+  <h2>How to block it</h2>
+  <p>Add this to your <code>robots.txt</code>:</p>
+  <pre>User-agent: KAIROS-CI
+Disallow: /</pre>
+  <p>The crawler will stop fetching your site from its next run.</p>
+
+  <h2>Contact</h2>
+  <p>To ask a question, report a problem or request that your site is excluded, open an issue here: <a href="https://github.com/P1ND4R/P1ND4R.github.io/issues/new?title=KAIROS-CI%20crawler%20request">github.com/P1ND4R/P1ND4R.github.io/issues</a>. Exclusion requests are honoured without question.</p>
+
+  <footer>KAIROS-CI · Project information page · Last updated November 2026</footer>
+</main>
+</body>
+</html>
